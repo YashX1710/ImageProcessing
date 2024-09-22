@@ -3,6 +3,7 @@ const axios = require('axios');
 const fs = require('fs');
 const { Product, Request } = require('./models');
 const validUrl = require("valid-url");
+const path = require("path");
 
 async function processImages(requestId) {
   const products = await Product.find({ requestId });
@@ -19,7 +20,7 @@ async function processImages(requestId) {
     for (const url of product.inputUrls) {
       console.log(`Processing URL: ${url}`); // Log URL
       try {
-        // Validate the URL
+  
         if (!validUrl.isUri(url)) {
           throw new Error(`Invalid URL: ${url}`);
         }
